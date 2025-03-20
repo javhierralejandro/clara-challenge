@@ -15,3 +15,9 @@ class MenuPage(GlobalPage):
     LOG_OUT_BUTTON = (By.NAME, "menu item log out")
     API_CALLS_BUTTON = (By.NAME, "menu item api calls")
     SAUCE_BOT_VIDEO_BUTTON = (By.NAME, "menu item sauce bot video")
+
+    def click_login(self):
+        self.click_element(self.LOG_IN_BUTTON)
+
+    def click_logout(self):
+        self.click_element(self.LOG_OUT_BUTTON)

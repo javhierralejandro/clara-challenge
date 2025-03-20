@@ -22,3 +22,9 @@ class ProductPage(GlobalPage):
 
     def add_product_to_cart(self):
         self.click_element(self.ADD_TO_CART_BUTTON)
+
+    def increase_item_amount(self):
+        self.click_element(self.COUNTER_PLUS_BUTTON)
+
+    def decrease_item_amount(self):
+        self.click_element(self.COUNTER_MINUS_BUTTON)

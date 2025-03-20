@@ -14,6 +14,9 @@ class GlobalPage:
     def find_element(self, locator):
         return self.wait.until(EC.presence_of_element_located(locator))
 
+    def find_elements(self, locator):
+        return self.wait.until(EC.presence_of_all_elements_located(locator))
+
     def click_element(self, locator):
         element = self.find_element(locator)
         element.click()
@@ -22,3 +25,12 @@ class GlobalPage:
         element = self.find_element(locator)
         element.clear()
         element.send_keys(text)
+
+    def open_catalog(self):
+        self.click_element(self.CATALOG_BUTTON)
+
+    def open_cart(self):
+        self.click_element(self.CART_BUTTON)
+
+    def open_menu(self):
+        self.click_element(self.MENU_BUTTON)
