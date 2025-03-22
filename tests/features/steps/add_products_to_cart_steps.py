@@ -7,17 +7,20 @@ from pages.product_page import ProductPage
 from pages.menu_page import MenuPage
 from utils.driver import get_driver
 
+# Step definition for navigating to the catalog page
 @given('the user is on the catalog page')
 def step_go_to_catalog_page(context):
     context.driver = get_driver()
     context.catalog_page = CatalogPage(context.driver)
 
+# Step definition for selecting a product in the catalog page by index
 @when('the user selects product {index} in the catalog page')
 def step_select_product_in_catalog(context, index):
     index = int(index)
     context.catalog_page.select_product(index)
     context.product_page = ProductPage(context.driver)
 
+# Step definition for selecting a product in the catalog page
 @when('the user adds product to cart')
 def step_add_product_to_cart(context):
     context.product_page.add_product_to_cart()
@@ -26,6 +29,7 @@ def step_add_product_to_cart(context):
     context.menu_page = MenuPage(context.driver)
     context.menu_page.open_catalog()
 
+# Step definition for verifying the number of products in the cart
 @then('the cart should contain {num} product(s)')
 def step_verify_cart_single_product(context, num):
     expected_cart_count = int(num)
