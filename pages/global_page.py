@@ -1,14 +1,15 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from utils.driver import get_driver
 
 class GlobalPage:
-    CATALOG_BUTTON = (By.NAME, "tab bar option catalog")
-    CART_BUTTON = (By.NAME, "tab bar option cart")
-    MENU_BUTTON = (By.NAME, "tab bar option menu")
+    MENU_BUTTON = (By.XPATH, "//android.view.ViewGroup[@content-desc='open menu']/android.widget.ImageView")
+    CART_ITEM_BUTTON = (By.XPATH, "//android.view.ViewGroup[@content-desc='cart badge']//android.widget.TextView")
 
-    def __init__(self, driver):
-        self.driver = driver
+
+    def __init__(self, driver=None):
+        self.driver = driver or get_driver()
         self.wait = WebDriverWait(driver, 10)
 
     def find_element(self, locator):
@@ -23,14 +24,24 @@ class GlobalPage:
 
     def enter_text(self, locator, text):
         element = self.find_element(locator)
-        element.clear()
+        # element.clear()
         element.send_keys(text)
 
-    def open_catalog(self):
-        self.click_element(self.CATALOG_BUTTON)
+    def is_element_visible(self, locator):
+        try:
+            return self.wait.until(EC.visibility_of_element_located(locator))
+        except:
+            return False
+
+    def get_cart_count(self):
+        try:
+            cart = self.find_element(self.CART_ITEM_BUTTON)
+            return int(cart.text.strip())
+        except:
+            return 0
 
     def open_cart(self):
-        self.click_element(self.CART_BUTTON)
+        self.click_element(self.CART_ITEM_BUTTON)
 
     def open_menu(self):
         self.click_element(self.MENU_BUTTON)

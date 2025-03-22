@@ -3,10 +3,10 @@ from selenium.webdriver.common.by import By
 from pages.global_page import GlobalPage
 
 class CartPage(GlobalPage):
-    REMOVE_ITEM_BUTTON = (By.NAME, "remove item")
-    COUNTER_MINUS_BUTTON = (By.NAME, "counter minus button")
-    COUNTER_PLUS_BUTTON = (By.NAME, "counter plus button")
-    CHECKOUT_BUTTON =  (By.NAME, "Proceed To Checkout button")
+    REMOVE_ITEM_BUTTON = (By.XPATH, "//android.view.ViewGroup[@content-desc='remove item']")
+    COUNTER_MINUS_BUTTON = (By.XPATH, "//android.view.ViewGroup[@content-desc='counter minus button']")
+    COUNTER_PLUS_BUTTON = (By.XPATH, "//android.view.ViewGroup[@content-desc='counter plus button']")
+    CHECKOUT_BUTTON =  (By.XPATH, "//android.view.ViewGroup[@content-desc='Proceed To Checkout button']")
 
     def count_products(self):
         try:
@@ -16,11 +16,12 @@ class CartPage(GlobalPage):
         except Exception as e:
             print(f"There is a problem retrieving the number of products: {e}")
 
-
-    def remove_item(self, number):
+    def remove_item(self):
         products_quantity = self.count_products()
         if products_quantity > 1:
-            self.click_element((By.XPATH, f"(//XCUIElementTypeOther[@name='remove item'])[{number}]"))
+            product_xpath = "(" + self.REMOVE_ITEM_BUTTON[1] + f")[{products_quantity}]"
+            product_element_locator = (By.XPATH, product_xpath)
+            self.click_element(product_element_locator)
         else:
             self.click_element(self.REMOVE_ITEM_BUTTON)
 
