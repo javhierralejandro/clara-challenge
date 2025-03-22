@@ -1,6 +1,7 @@
-color_circle: black
-review_star: 1
+# color_circle: black
+# review_star: 1
 
+# Path: config.yaml
 platformName: "Android"
 appium:deviceName: "emulator-5554"
 appium:appPackage: "com.saucelabs.mydemoapp.rn"
