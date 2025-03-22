@@ -5,7 +5,7 @@ from pages.global_page import GlobalPage
 
 
 class ProductPage(GlobalPage):
-    ADD_TO_CART_BUTTON = (By.NAME, "Add To Cart button")
+    ADD_TO_CART_BUTTON = (By.XPATH, "//android.view.ViewGroup[@content-desc='Add To Cart button']")
     COUNTER_MINUS_BUTTON = (By.NAME, "counter minus button")
     COUNTER_PLUS_BUTTON = (By.NAME, "counter plus button")
 
@@ -17,8 +17,6 @@ class ProductPage(GlobalPage):
     REVIEW_STAR_BUTTON = (By.NAME, f"review star {review_star}")
     NAVIGATION_BACK_BUTTON = (By.NAME, "navigation back button")
 
-    def launch_app(self):
-        self.driver.launch_app()
 
     def add_product_to_cart(self):
         self.click_element(self.ADD_TO_CART_BUTTON)
